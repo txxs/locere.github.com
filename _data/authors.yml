@@ -1,0 +1,30 @@
+# Authors
+
+ju_zhang:
+  name: 菊长
+  web: http://aicdg.com
+  email: yangyj19931231@gmail.com
+  bio: "敌羞，吾去拖他衣"
+  avatar: bio-photo.jpg
+  twitter: 
+  google:
+    plus: +彦君
+
+billy_rick:
+  name: Billy Rick
+  web: http://thewhip.com
+  email: billy@rick.com
+  bio: "What do you want, jewels? I am a very extravagant man."
+  avatar: bio-photo.jpg
+  twitter: extravagantman
+  google:
+    plus: +BillyRick
+
+cornelius_fiddlebone:
+  name: Cornelius Fiddlebone
+  email: cornelius@thewhip.com
+  bio: "I ordered what?"
+  avatar: bio-photo.jpg
+  twitter: rhymeswithsackit
+  google:
+    plus: +CorneliusFiddlebone

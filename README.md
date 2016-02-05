@@ -1,17 +1,45 @@
-# Skinny Bones Jekyll Starter
+# html5canvas
+html5canvas核心技术学习记录
 
-Just a little something I'm using to jump start a site refresh. I like to think of it as a starter for building your own Jekyll site. I purposely keep the styling minimal and bare to make it easier to add your own flare and markup.
 
-I'm currently using a variation of it on my personal website [Made Mistakes](http://mademistakes.com) with some modifications. To learn more about how to use the theme and install it check out the [Skinny Bones demo](http://mmistakes.github.io/skinny-bones-jekyll/) (*work in progress*).
+##Adding New Content with Octopress
 
-![screenshot of Skinny Bones](http://mmistakes.github.io/skinny-bones-jekyll/images/skinny-bones-theme-feature.jpg)
+&#160; &#160; &#160; &#160;该blog程序添加了octopress大量功能，想要使用请先安装octopress
+
+{% highlight bash %} 
+$ gem install octopress --pre 
+{% endhighlight %}
+
+
+### New Post
+
+Default command
+
+{% highlight bash %}
+$ octopress new post "Post Title"
+{% endhighlight %}
+
+Default works great if you want all your posts in one directory, but if you're like me and want to group them into sub-folders like `/articles`, `/portfolio`, etc. Then this is the command for you. By specifying the DIR it will create a new post in that folder and populate `categories:` with the same value.
+
+{% highlight bash %}
+{% endhighlight %}
+
+The default `_layout` used for new posts is `articles`. If you want to use the media layout or something else specify it like so
+
+{% highlight bash %}
+$ octopress new post "Portfolio Post Title" --dir portfolio --template media
+{% endhighlight %}
+
+### New Page
+
+To create a new page use the following command.
+
+{% highlight bash %}
+$ octopress new page about/
+{% endhighlight %}
+
+This will create a page at `/about/index.md`
 
 ---
 
-## Notable Features
-
-* Jekyll 3.x and GitHub Pages compatible.
-* Stylesheet built using Sass.
-* Data files for easier customization of the site navigation/footer and for supporting multiple authors.
-* Optional Disqus comments, table of contents, social sharing links, and Google AdSense ads.
-* And more.
+最后祝您身体健康，再见

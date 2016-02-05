@@ -1,51 +1,37 @@
 # Site wide configuration
 
-title: "童心向上的小站"
-description:
-logo: # 120x120 px default image used for Twitter summary card
-teaser: 400250.gif
-locale: en
-url:
+title: 菊长的绘画教室
+description: "html5 canvas学习展示区"
+logo: 120x120.gif # 120x120 px default image used for Twitter summary card
+teaser: 400x250.gif # 400x250 px default teaser image used in image archive grid
+locale: zh_CN
+url:  //thisisagoodname.github.io/html5canvas
 
 # Jekyll configuration
 
 sass:
-  sass_dir: _sass
-  style: compressed
+    sass_dir: _sass
+    style: compressed
 permalink: /:categories/:title/
 kramdown:
   toc_levels: 1..2
-highlighter: rouge
+highlighter: pygments
 gems:
   - jekyll-sitemap
-  - jekyll-gist
-
-
-# Octopress configuration
-cover_image: first.jpg
-# Default extensions
-post_ext: md
-page_ext: md
-
-# Found in _templates/
-post_layout: article
-page_layout: article
-
-# Format titles with titlecase?
-titlecase: true
 
 
 # Site owner
 owner:
-  name:
-  email:
-  twitter:
+  name: 菊长
+  web: http://aicdg.com
+  email: yangyj19931231@gmail.com
+  twitter: 
   google:
-    ad-client:
-    ad-slot:
-  bio:
+    ad-client: 
+    ad-slot: 
+  bio: 
   avatar: bio-photo.jpg # 160x160 px image for author byline
-  disqus-shortname:
+  disqus-shortname: aicdgh5canvas
 
 
 exclude: ["lib", "config.rb", ".sass-cache", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "*.sublime-project", "*.sublime-workspace", "Gemfile", "Gemfile.lock", "README.md", "LICENSE", "node_modules", "Gruntfile.js", "package.json"]

@@ -1,6 +1,21 @@
 # Site navigation links
 
-- title:
-  url:
-  excerpt:
-  image:
+- title: 快速开始
+  url: /getting-started/
+  excerpt: "只要稍微了解一些html5和javascript的知识，就可以制作属于自己的绚丽场景"
+  image: 400x250.gif
+
+- title: 心得体会
+  url: /articles/
+  excerpt: "html5 canvas 学习的中的一些见解"
+  image: 400x250.gif
+
+- title: 精彩实例
+  url: /media/
+  excerpt: "html5 canvas 学习过程中创造的一些实例"
+  image: 400x250.gif
+
+- title: 关于本站
+  url: /about/
+  excerpt: "关于猥大的菊长"
+  image: 400x250.gif

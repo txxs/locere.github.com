@@ -12,7 +12,7 @@
       transform: translateX(em(-600));
     }
     @include media($large) {
-      transform: translateX(em(-900));
+      transform: translateX(em(-400));
     }
   }
 
@@ -47,7 +47,7 @@
       transform: translateX(em(-600)); /* reset slide position */
     }
     @include media($large) {
-      transform: translateX(em(-900)); /* reset slide position */
+      transform: translateX(em(-400)); /* reset slide position */
     }
   }
 }
@@ -69,7 +69,7 @@
     width: em(600);
   }
   @include media($large) {
-    width: em(900);
+    width: em(400);
   }
   transform: translateX(100%);
   transition: $sliding-menu-animation;
