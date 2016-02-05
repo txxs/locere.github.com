@@ -22,7 +22,7 @@ gems:
 
 
 # Octopress configuration
-
+cover_image: first.jpg
 # Default extensions
 post_ext: md
 page_ext: md
