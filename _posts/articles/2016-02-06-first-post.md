@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "First Blog"
+title: "First Blog" 
 categories: articles
 tags: [sample]
 comments: true
