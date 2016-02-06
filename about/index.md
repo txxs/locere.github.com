@@ -1,9 +1,9 @@
 ---
 layout: article
-title: "About"
+title: "关于本站"
 date: 2014-06-02T09:44:20-04:00
 modified: 2014-08-27T14:56:44-04:00
-excerpt: "This is the Skinny Bones about page."
+excerpt: "关于童心向上的事情"
 image:
   feature:
   teaser:
