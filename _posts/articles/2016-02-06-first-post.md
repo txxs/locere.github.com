@@ -6,5 +6,5 @@ tags: [sample]
 comments: true
 ads: true
 image:
-  teaser: 400x250.gif
+  teaser: 4002502.jpg
 ---
