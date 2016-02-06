@@ -2,20 +2,20 @@
 
 - title: 快速开始
   url: /getting-started/
-  excerpt: "只要稍微了解一些html5和javascript的知识，就可以制作属于自己的绚丽场景"
+  excerpt: "这里是模板开始的一些小的前言"
   image: 400x250.gif
 
-- title: 心得体会
+- title: 博客文章
   url: /articles/
-  excerpt: "html5 canvas 学习的中的一些见解"
+  excerpt: "在学习的过程中，对技术、前言和自己的思考做一些整理"
   image: 400x250.gif
 
 - title: 精彩实例
   url: /media/
-  excerpt: "html5 canvas 学习过程中创造的一些实例"
+  excerpt: "在技术学习的过程中验证技术的一些实例，主要是放在git上的实例"
   image: 400x250.gif
 
 - title: 关于本站
   url: /about/
-  excerpt: "关于猥大的菊长"
+  excerpt: "关于童心向上的事情"
   image: 400x250.gif
