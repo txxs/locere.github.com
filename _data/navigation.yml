@@ -2,20 +2,20 @@
 
 - title: 快速开始
   url: /getting-started/
-  excerpt: "这里是模板开始的一些小的前言"
+  excerpt: "小站模板的使用说明"
   image: 4002501.jpg
 
 - title: 博客文章
   url: /articles/
-  excerpt: "在学习的过程中，对技术、前言和自己的思考做的一些整理"
+  excerpt: "技术、前言和思考做的整理"
   image: 4002502.jpg
 
 - title: 精彩实例
   url: /media/
-  excerpt: "在技术学习的过程中验证技术的一些实例，主要是放在git上的实例"
+  excerpt: "技术实例，托管github"
   image: 4002503.jpg
 
 - title: 关于本站
   url: /about/
-  excerpt: "关于童心向上的事情"
+  excerpt: "关于童心向上"
   image: 4002504.jpg
