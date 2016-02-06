@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "关于Skinny Bones模板的快速开始"
+title: "Skinny Bones"
 date: 2014-06-25T13:57:25-04:00
 modified:
 excerpt:
