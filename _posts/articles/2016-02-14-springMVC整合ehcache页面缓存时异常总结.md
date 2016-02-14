@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "简单使springMVC整合ehcache页面缓存时异常总结用markdown"
+title: "springMVC整合ehcache页面缓存时异常总结"
 modified:
 categories: articles
 excerpt: ""
