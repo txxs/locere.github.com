@@ -8,7 +8,7 @@ comments: true
 tags: []
 image: 
   feature: 1600x800.gif.jpg
-  teaser: 异常.png
+  teaser: error.png
   thumb:
 date: 2016-02-14T18:50:29+08:00
 ---
