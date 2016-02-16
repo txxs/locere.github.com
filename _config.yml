@@ -8,7 +8,7 @@ locale: zh_CN
 url:  
 
 # Jekyll configuration
-
+ 
 sass:
     sass_dir: _sass
     style: compressed
@@ -16,10 +16,13 @@ permalink: /:categories/:title/
 kramdown:
   toc_levels: 1..2
 highlighter: pygments
+# 每一页显示的文章数
+paginate: 5  
 gems:
   - jekyll-sitemap
 
 
+  
 # Site owner
 owner:
   name: txxs
