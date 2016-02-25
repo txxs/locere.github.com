@@ -10,7 +10,7 @@ image:
   feature: 1600x800.gif.jpg
   teaser: leetcode.jpg
   thumb:
-date: 2016-02-25T16:50:29+08:00
+date: 2016-02-25T09:20:29+08:00
 ---
 
 {% include toc.html %}
