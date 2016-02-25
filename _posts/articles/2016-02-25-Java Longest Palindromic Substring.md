@@ -10,7 +10,7 @@ image:
   feature: 1600x800.gif.jpg
   teaser: leetcode.jpg
   thumb:
-date: 2016-02-25T09:20:29+08:00
+date: 2016-02-25T19:20:29+08:00
 ---
 
 {% include toc.html %}
@@ -203,4 +203,37 @@ public class LongestPalindromicSubString3 {
 }
 {% endhighlight %}
 
+下边这个提交成功
+
+{% highlight java %}
+    public String intermediatePalindrome(String s, int left, int right) {
+        if (left > right) return null;
+        while (left >= 0 && right < s.length()
+                && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+        return s.substring(left + 1, right);
+    }
+       
+       
+    public String longestPalindrome(String s) {
+        if (s == null) 
+            return null;
+        String longest = s.substring(0, 1);
+        for (int i = 0; i < s.length() - 1; i++) {
+            //odd cases like 121
+            String palindrome = intermediatePalindrome(s, i, i);
+            if (palindrome.length() > longest.length()) {
+                longest = palindrome;
+            }
+            //even cases like 1221
+            palindrome = intermediatePalindrome(s, i, i + 1);
+            if (palindrome.length() > longest.length()) {
+                longest = palindrome;
+            }
+        }
+        return longest;
+    }
+{% endhighlight %}
 
