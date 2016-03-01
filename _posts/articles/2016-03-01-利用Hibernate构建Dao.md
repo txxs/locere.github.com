@@ -19,7 +19,7 @@ Dao层实现的就是增删改查，增加、更新和删除的形式基本固�
 
 ## 定义实体基础类
 
-{% highlight java%}
+{% highlight java %}
 public abstract class BaseEntity {
 
 	public abstract boolean isNew();
@@ -35,7 +35,8 @@ public abstract class BaseEntity {
 ## 定义抽象Dao
 
 在这个Dao中，将一些通用的操作，抽象出来
-{% highlight java%}
+
+{% highlight java %}
 public abstract class AbstractJpaDao<T extends BaseEntity> {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -144,7 +145,7 @@ public abstract class AbstractJpaDao<T extends BaseEntity> {
 
 每个类对应的具体的实现类，可以将类的信息传递到`AbstractJpaDao`中去
 
-{% highlight java%}
+{% highlight java %}
 @Repository
 public class GuardianDao extends AbstractJpaDao<Guardian> {
 
