@@ -2,7 +2,7 @@
 layout: home
 permalink: /
 image:
-  feature: Kazami-Yuuka-1600x1200.jpg
+  feature: use.gif
 ---
 
 
