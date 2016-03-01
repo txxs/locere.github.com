@@ -17,120 +17,165 @@ date: 2016-03-01T10:50:29+08:00
 
 Dao层实现的就是增删改查，增加、更新和删除的形式基本固定，变化最多的就是查询，但是对于一些固定的操作，比如删除、增加和更新等，我们在实现的时候没有必要为每一个实体对应的Dao增加这些方法的实现，我们可以把它们抽象出来放在一个统一的类中处理，这样可以很大程度上提高代码的可用性。
 
-### 文件的命名（标题之间要有换行）
-Jekyll中一篇文章就是一个文件，所有需要发布的文章都要放在_posts文件夹内。Jekyll对于文章的文件名也是有要求的，系统会根据文件名来生成每篇文章的链接地址。具体的格式为：YYYY-MM-DD-文章标题.markdown 其中YYYY为4位年份，MM是两位的月份，DD是两位的日期。类似于这种:
-![](http://7xqsae.com1.z0.glb.clouddn.com/1.PNG)
+## 定义实体基础类
 
-layout使用指定的模版文件，不加扩展名。模版文件放在_layouts目录下。
-title文章的标题。
-date发布文章的时间。
-categories将文章设置成不同的属性。系统在生成页面时会根据多个属性值来生成文章地址。以上设置会生http://.../jekyll/update/...格式的文章链接。
-tags标签，一篇文章可以设置多个标签，使用空格分割。
-基本上一篇文章只要用到以上一些信息就可以了，当然还有其它的变量可以设置，具体用法可以在[Jekyll网站](http://jekyllrb.com/docs/frontmatter/)上查看。
+{% highlight java%}
+public abstract class BaseEntity {
 
-### 评论功能的代码
+	public abstract boolean isNew();
 
-{% highlight javascript %}
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = '//txxs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
+
+}
 {% endhighlight %}
 
-{% highlight yaml %}
-comments: true
+## 定义抽象Dao
+
+在这个Dao中，将一些通用的操作，抽象出来
+{% highlight java%}
+public abstract class AbstractJpaDao<T extends BaseEntity> {
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@PersistenceContext
+	protected EntityManager em;
+
+    //用于在子类中获取类的信息
+	protected abstract Class<T> getEntityClass();
+	protected abstract Map<String, String> getSearchFields();
+	public T get(Serializable id) {
+		return em.find(getEntityClass(), id);
+	}
+
+	public List<T> findAll() {
+		return findAll("", true);
+	}
+
+	public List<T> findAll(String order, boolean ascending) {
+		return em.createQuery(buildQuery(null, false, order, ascending),
+				getEntityClass()).getResultList();
+	}
+
+	public List<T> find(Map<String, Object> params, int start, int count,
+			String order, boolean ascending) {
+		TypedQuery<T> q = em.createQuery(
+				buildQuery(params.keySet().iterator(), order, ascending),
+				getEntityClass());
+		setParameters(q, params);
+		q.setFirstResult(start);
+		q.setMaxResults(count > getMaxResults() ? getMaxResults() : count);
+		return q.getResultList();
+	}
+
+	public T getSingleResult(Map<String, Object> params) {
+		TypedQuery<T> q = em.createQuery(
+				buildQuery(params.keySet().iterator(), "", true),
+				getEntityClass());
+		setParameters(q, params);
+		q.setFirstResult(0);
+		q.setMaxResults(getMaxResults());
+
+		try {
+			return q.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+
+	}
+
+	private String buildCountQuery(Iterator<String> keys) {
+		return buildQuery(keys, true, "", true);
+	}
+
+	private String buildQuery(Iterator<String> keys, String order,
+			boolean ascending) {
+		return buildQuery(keys, false, order, ascending);
+	}
+
+
+	public long count(Map<String, Object> params) {
+		TypedQuery<Long> q = em.createQuery(buildCountQuery(params.keySet()
+				.iterator()), Long.class);
+		setParameters(q, params);
+		return q.getSingleResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Object[]> executeQuery(String qlString,
+			Map<String, Object> params) {
+		Query q = em.createQuery(qlString);
+		if (params != null) {
+			for (String key : params.keySet()) {
+				q.setParameter(key, params.get(key));
+			}
+		}
+		q.setMaxResults(getMaxResults());
+		return (List<Object[]>)q.getResultList();
+	}
+
+	public T save(T entity) {
+		em.persist(entity);
+		return entity;
+	}
+
+	public T update(T entity) {
+		em.merge(entity);
+		return entity;
+	}
+
+	public T delete(T entity) {
+		em.remove(entity);
+		return entity;
+	}
+
+	public T deleteById(Serializable id) {
+		T entity = em.find(getEntityClass(), id);
+		if (entity != null)
+			em.remove(entity);
+		return entity;
+	}
+
+}
 {% endhighlight %}
 
-{% highlight html %}
-<div class="tiles">
-{{ "{% for post in site.categories.foo " }}%}
-  {{ "{% include post-grid.html " }}%}
-{{ "{% endfor " }}%}
-</div><!-- /.tiles -->
+## 具体Dao
+
+每个类对应的具体的实现类，可以将类的信息传递到`AbstractJpaDao`中去
+
+{% highlight java%}
+@Repository
+public class GuardianDao extends AbstractJpaDao<Guardian> {
+
+	@Override
+	protected Class<Guardian> getEntityClass() {
+		return Guardian.class;
+	}
+	
+	@Override
+	protected Map<String, String> getSearchFields() {
+		Map<String, String> searchFields = new HashMap<String, String>();
+		searchFields.put("id", "=");
+		searchFields.put("name", "like");
+		searchFields.put("cardNo", "=");
+		searchFields.put("mobile", "=");
+		searchFields.put("username", "=");
+		searchFields.put("school.id", "=");
+		searchFields.put("kid.id", "=");
+		searchFields.put("synStatus", "=");
+		return searchFields;
+	}
+
+}
 {% endhighlight %}
 
-If `jekyll build` and `jekyll serve` throw errors you may have to run Jekyll with `bundled exec` instead.
+service在调用`AbstractJpaDao.get(id)`时是如何确定调用的哪个类的方法呢？
 
-> In some cases, running executables without bundle exec may work, if the executable happens to be installed in your system and does not pull in any gems that conflict with your bundle.
->
->However, this is unreliable and is the source of considerable pain. Even if it looks like it works, it may not work in the future or on another machine.
-
-{% highlight text %}
-bundle exec jekyll build
-
-bundle exec jekyll serve
+{% highlight java%}
+	public T get(Serializable id) {
+		return em.find(getEntityClass(), id);
+	}
 {% endhighlight %}
 
-{% highlight text %}
----
-layout: article
-title: "简单使用markdown"
-modified:
-categories: articles
-excerpt: ""
-comments: true
-tags: []
-image: 
-  feature://文章上边的大的图片
-  teaser: 4002502.jpg//进入文章之前的图片
-  thumb:
-date: 2016-02-08T21:50:29+08:00
----
-{% endhighlight %}
-
-# 以下是单纯的markdown使用的测试
-
-无序列表使用星号、加号或是减号作为列表标记：
-无序列表使用星号、加号或是减号作为列表标记：
-
-	*   Red
-	*   Green
-	*   Blue
-
-等同于：
-
-	+   Red 
-	+   Green
-	+   Blue
-
-也等同于：
-
-	- Red
-	- Green
-	- Blue
-
-有序列表则使用数字接着一个英文句点：
-
-[TOC]
-
-1.Bird
-
-写一句话
-
-2.MHale
-
-写第二句
-
-3.Parish
-
-写第三句
-
-# 添加视频
-
-下边是一个添加视频的操作，视频来自youtobe
-
-<iframe width="560" height="315" src="//www.youtube.com/embed/9e1nPyHXCFQ" frameborder="0"> </iframe>
-
-本篇文章主要用于测试，参考链：
-
-http://wellsnake.com/jekyll/update/2014/05/24/Jekyll%E4%BD%BF%E7%94%A8%E7%AF%871/
-
-http://blog.csdn.net/maoyeqiu/article/details/50641162
-
-https://www.zybuluo.com/mdeditor?url=https%3A%2F%2Fwww.zybuluo.com%2Fstatic%2Feditor%2Fmd-help.markdown
-
-http://www.jianshu.com/p/2446d0cd3ec5
-
-以及原文中的使用的形式：http://locere.com/getting-started/
+也就是如何确定`getEntityClass()`获取哪个类呢？在框架注入的时候就已经确定

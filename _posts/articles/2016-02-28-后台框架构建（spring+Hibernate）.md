@@ -38,6 +38,7 @@ date: 2016-02-28T21:20:29+08:00
 
 ##Service
 
+顺序是先在GuardianService自己的实现中，去寻找实现，没有的话到接口中去，然后在接口的实现中找到它的实现。
 下边是接口的内容它继承自BaseService
 
 {% highlight java %}
