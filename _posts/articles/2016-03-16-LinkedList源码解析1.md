@@ -10,7 +10,7 @@ image:
   feature: 1600x800.gif.jpg
   teaser: Translate.jpg
   thumb:
-date: 2016-03-14T13:50:29+08:00
+date: 2016-03-16T12:50:29+08:00
 ---
 
 {% include toc.html %}
@@ -506,3 +506,21 @@ public void addFirst(E e) {
 看看Deque 的实现是不是很简单，逻辑都是基于上面讲的链表操作的，对于队列的一些概念我不打算在这里讲，是因为后面队列会单独拿出来分析啦，这里只要理解基于链表实现的list内部是怎么操作的就可以啦。。。
 
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
