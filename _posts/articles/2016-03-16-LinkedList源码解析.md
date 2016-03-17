@@ -113,6 +113,7 @@ private static class Entry<E> {
     }
 }
 {% endhighlight %}
+
 Entry为LinkedList 的内部类，其中定义了当前存储的元素，以及该元素的上一个元素和下一个元素。结合上面双向链表的示意图很容易看懂。
 
 ## 构造方法
@@ -143,6 +144,7 @@ public LinkedList() {
       header. previous = null;
 }
 {% endhighlight %}
+
 非循环链表的情况应该是header节点的前一节点和后一节点均为null（参见链表图解）。
 
 ## 增加
@@ -228,7 +230,8 @@ public boolean addAll(int index, Collection<? extends E> c) {
     size += numNew;
     return true;
 }
-{% endhighlight %}     
+{% endhighlight %}    
+ 
 增加方法的代码理解起来可能有些困难，但是只要理解了双向链表的存储结构，掌握增加的核心逻辑就可以了，这里总结一下往链表中增加元素的核心逻辑：1.将元素转换为链表节点，2.增加该节点的前后引用（即pre和next分别指向哪一个节点），3.前后节点对该节点的引用（前节点的next指向该节点，后节点的pre指向该节点）。现在再看下就这么简单么，就是改变前后的互相指向关系（看图增加元素前后的变化）。
 
 ## 删除
@@ -278,6 +281,7 @@ private E remove(Entry<E> e) {
     return result;
 }
 {% endhighlight %} 
+
 上面对于链表增加元素总结了，一句话就是“改变前后的互相指向关系”，删除也是同样的道理，由于节点被删除，该节点的上一个节点和下一个节点互相拉一下小手就可以了，注意的是“互相”，不能一厢情愿。
 
 ## 查询
@@ -393,6 +397,7 @@ private Entry<E> entry( int index) {
      }
      return -1;
  }
+{% endhighlight %} 
      
 和public boolean remove(Object o) 一样，indexOf查询元素位于容器的索引位置，都是需要对链表进行遍历操作，当然也就是低效了啦。
 
@@ -416,6 +421,7 @@ private Entry<E> entry( int index) {
  public boolean isEmpty() {
      return size() == 0;
  }
+{% endhighlight %} 
      
 和ArrayList一样，基于计数器size操作，容量判断很方便。
      
