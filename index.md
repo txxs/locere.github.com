@@ -2,7 +2,7 @@
 layout: home
 permalink: /
 image:
-  feature: use.gif
+  feature: use.jpg
 ---
 
 
